@@ -1,0 +1,638 @@
+import random
+import turtle
+
+#VARIABLES
+vel = 0.5 #velocidad de los obstaculos
+time = 1000 #cada cuanto tiempo cambian de direccion los obstaculos
+t = time
+lim = 425 #limites de los obstaculos
+areat = 470 #tamaño del marco
+vel_p1 = 0.7 #velocidad del jugador 1
+dis = 45 #distancia en la que se considera colision entre jugador y obstaculo
+dis2 = 25 #distancia en la que se considera colision entre jugador y objetivo
+vida = 1000 #vida inicial del jugador
+pun = 0 #puntos del jugador
+tam = 3.5 #tamaño de los obstaculos
+dificultad = input("ESCRIBA LA DIFICULTAD (FACIL, MEDIO, DIFICL): ")
+
+#PANTALLA
+wn = turtle.Screen()
+wn.title("Juego de Thomas Marthi")
+wn.bgcolor("black")
+wn.setup(width=1200, height=1000)
+wn.tracer(0)
+
+if dificultad == "facil" or dificultad == "f":
+    vel = 0.3
+    vel_p1 = 0.5
+    tam = 2
+    dis = 30
+    lim = 445
+if dificultad == "medio" or dificultad == "m":
+    vel = 0.6
+    vel_p1 = 0.8
+    tam = 3.5
+    dis = 45
+    lim = 435
+if dificultad == "dificil" or dificultad == "d":
+    vel = 0.7
+    vel_p1 = 1.1
+    tam = 4.5
+    dis = 55
+    vida = 500
+    lim = 425
+#MARCO
+area = turtle.Turtle()
+area.speed(0)
+area.color("white")
+area.up()
+area.goto(areat,areat)
+area.down()
+area.goto(areat,-areat)
+area.goto(-areat,-areat)
+area.goto(-areat,areat)
+area.goto(areat,areat)
+area.hideturtle()
+area.up()
+area.goto(-areat, 50)
+area.down()
+area.goto(-areat-100,50)
+area.goto(-areat-100,-50)
+area.goto(-areat, -50)
+
+#TEXTO (VIDA, PUNTOS)
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.up()
+pen.hideturtle()
+pen.goto(0,470)
+pen.write("VIDA: {}".format(vida), align="center", font=("Courier", 20, "normal"))
+pen.goto(300, 470)
+pen.write("PUNTOS {}".format(pun), align="center", font=("Courier", 20, "normal"))
+
+#JUGADOR
+p1 = turtle.Turtle()
+p1.speed(0)
+p1.shape("circle")
+p1.color("blue")
+p1.up()
+p1.goto(-520,0)
+p1.turtlesize(1.5)
+p1.direction = "stop"
+
+#OBJETIVOS
+obj = turtle.Turtle()
+obj.speed(0)
+obj.shape("circle")
+obj.color("red")
+obj.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+obj.goto(x,y)
+obj.turtlesize(1.5)
+obj.direction = "right"
+
+
+#OBSTACULOS
+o1 = turtle.Turtle()
+o1.speed(0)
+o1.shape("square")
+o1.color("white")
+o1.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o1.goto(x,y)
+o1.turtlesize(tam)
+o1.direction = "right"
+
+o2 = turtle.Turtle()
+o2.speed(0)
+o2.shape("square")
+o2.color("white")
+o2.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o2.goto(x,y)
+o2.turtlesize(tam)
+o2.direction = "right"
+
+o3 = turtle.Turtle()
+o3.speed(0)
+o3.shape("square")
+o3.color("white")
+o3.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o3.goto(x,y)
+o3.turtlesize(tam)
+o3.direction = "down"
+
+o4 = turtle.Turtle()
+o4.speed(0)
+o4.shape("square")
+o4.color("white")
+o4.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o4.goto(x,y)
+o4.turtlesize(tam)
+o4.direction = "up"
+
+o5 = turtle.Turtle()
+o5.speed(0)
+o5.shape("square")
+o5.color("white")
+o5.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o5.goto(x,y)
+o5.turtlesize(tam)
+o5.direction = "left"
+
+o6 = turtle.Turtle()
+o6.speed(0)
+o6.shape("square")
+o6.color("white")
+o6.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o6.goto(x,y)
+o6.turtlesize(tam)
+o6.direction = "right"
+
+o7 = turtle.Turtle()
+o7.speed(0)
+o7.shape("square")
+o7.color("white")
+o7.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o7.goto(x,y)
+o7.turtlesize(tam)
+o7.direction = "right"
+
+o8 = turtle.Turtle()
+o8.speed(0)
+o8.shape("square")
+o8.color("white")
+o8.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o8.goto(x,y)
+o8.turtlesize(tam)
+o8.direction = "right"
+
+o9 = turtle.Turtle()
+o9.speed(0)
+o9.shape("square")
+o9.color("white")
+o9.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o9.goto(x,y)
+o9.turtlesize(tam)
+o9.direction = "down"
+
+o10 = turtle.Turtle()
+o10.speed(0)
+o10.shape("square")
+o10.color("white")
+o10.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o10.goto(x,y)
+o10.turtlesize(tam)
+o10.direction = "up"
+
+o11 = turtle.Turtle()
+o11.speed(0)
+o11.shape("square")
+o11.color("white")
+o11.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o11.goto(x,y)
+o11.turtlesize(tam)
+o11.direction = "left"
+
+o12 = turtle.Turtle()
+o12.speed(0)
+o12.shape("square")
+o12.color("white")
+o12.up()
+x = random.randint(-450, 450)
+y = random.randint(-450, 450)
+o12.goto(x,y)
+o12.turtlesize(tam)
+o12.direction = "right"
+
+
+
+
+#MOVIMIENTO
+def goup():
+    p1.direction = "up"
+def godown():
+    p1.direction = "down"
+def goright():
+    p1.direction = "right"
+def goleft():
+    p1.direction = "left"
+def moverse_p1():
+    if p1.direction == "up":
+        y=p1.ycor()
+        p1.sety(y+vel_p1)
+    if p1.direction == "down":
+        y=p1.ycor()
+        p1.sety(y-vel_p1)
+    if p1.direction == "right":
+        x=p1.xcor()
+        p1.setx(x+vel_p1)
+    if p1.direction == "left":
+        x=p1.xcor()
+        p1.setx(x-vel_p1)
+wn.listen()
+wn.onkeypress(goup, "w")
+wn.onkeypress(goright, "d")
+wn.onkeypress(godown, "s")
+wn.onkeypress(goleft, "a")
+
+
+def moverse_o1():
+    if o1.direction == "up":
+        y=o1.ycor()
+        o1.sety(y+vel)
+    if o1.direction == "down":
+        y=o1.ycor()
+        o1.sety(y-vel)
+    if o1.direction == "right":
+        x=o1.xcor()
+        o1.setx(x+vel)
+    if o1.direction == "left":
+        x=o1.xcor()
+        o1.setx(x-vel)
+
+def moverse_o2():
+    if o2.direction == "up":
+        y=o2.ycor()
+        o2.sety(y+vel)
+    if o2.direction == "down":
+        y=o2.ycor()
+        o2.sety(y-vel)
+    if o2.direction == "right":
+        x=o2.xcor()
+        o2.setx(x+vel)
+    if o2.direction == "left":
+        x=o2.xcor()
+        o2.setx(x-vel)
+
+def moverse_o3():
+    if o3.direction == "up":
+        y=o3.ycor()
+        o3.sety(y+vel)
+    if o3.direction == "down":
+        y=o3.ycor()
+        o3.sety(y-vel)
+    if o3.direction == "right":
+        x=o3.xcor()
+        o3.setx(x+vel)
+    if o3.direction == "left":
+        x=o3.xcor()
+        o3.setx(x-vel)
+
+def moverse_o4():
+    if o4.direction == "up":
+        y=o4.ycor()
+        o4.sety(y+vel)
+    if o4.direction == "down":
+        y=o4.ycor()
+        o4.sety(y-vel)
+    if o4.direction == "right":
+        x=o4.xcor()
+        o4.setx(x+vel)
+    if o4.direction == "left":
+        x=o4.xcor()
+        o4.setx(x-vel)
+
+def moverse_o5():
+    if o5.direction == "up":
+        y=o5.ycor()
+        o5.sety(y+vel)
+    if o5.direction == "down":
+        y=o5.ycor()
+        o5.sety(y-vel)
+    if o5.direction == "right":
+        x=o5.xcor()
+        o5.setx(x+vel)
+    if o5.direction == "left":
+        x=o5.xcor()
+        o5.setx(x-vel)
+
+def moverse_o6():
+    if o6.direction == "up":
+        y=o6.ycor()
+        o6.sety(y+vel)
+    if o6.direction == "down":
+        y=o6.ycor()
+        o6.sety(y-vel)
+    if o6.direction == "right":
+        x=o6.xcor()
+        o6.setx(x+vel)
+    if o6.direction == "left":
+        x=o6.xcor()
+        o6.setx(x-vel)
+
+def moverse_o7():
+    if o7.direction == "up":
+        y=o7.ycor()
+        o7.sety(y+vel)
+    if o7.direction == "down":
+        y=o7.ycor()
+        o7.sety(y-vel)
+    if o7.direction == "right":
+        x=o7.xcor()
+        o7.setx(x+vel)
+    if o7.direction == "left":
+        x=o7.xcor()
+        o7.setx(x-vel)
+
+def moverse_o8():
+    if o8.direction == "up":
+        y=o8.ycor()
+        o8.sety(y+vel)
+    if o8.direction == "down":
+        y=o8.ycor()
+        o8.sety(y-vel)
+    if o8.direction == "right":
+        x=o8.xcor()
+        o8.setx(x+vel)
+    if o8.direction == "left":
+        x=o8.xcor()
+        o8.setx(x-vel)
+
+def moverse_o9():
+    if o9.direction == "up":
+        y=o9.ycor()
+        o9.sety(y+vel)
+    if o9.direction == "down":
+        y=o9.ycor()
+        o9.sety(y-vel)
+    if o9.direction == "right":
+        x=o9.xcor()
+        o9.setx(x+vel)
+    if o9.direction == "left":
+        x=o9.xcor()
+        o9.setx(x-vel)
+
+def moverse_o10():
+    if o10.direction == "up":
+        y=o10.ycor()
+        o10.sety(y+vel)
+    if o10.direction == "down":
+        y=o10.ycor()
+        o10.sety(y-vel)
+    if o10.direction == "right":
+        x=o10.xcor()
+        o10.setx(x+vel)
+    if o10.direction == "left":
+        x=o10.xcor()
+        o10.setx(x-vel)
+
+def moverse_o11():
+    if o11.direction == "up":
+        y=o11.ycor()
+        o11.sety(y+vel)
+    if o11.direction == "down":
+        y=o11.ycor()
+        o11.sety(y-vel)
+    if o11.direction == "right":
+        x=o11.xcor()
+        o11.setx(x+vel)
+    if o11.direction == "left":
+        x=o11.xcor()
+        o11.setx(x-vel)
+
+def moverse_o12():
+    if o12.direction == "up":
+        y=o12.ycor()
+        o12.sety(y+vel)
+    if o12.direction == "down":
+        y=o12.ycor()
+        o12.sety(y-vel)
+    if o12.direction == "right":
+        x=o12.xcor()
+        o12.setx(x+vel)
+    if o12.direction == "left":
+        x=o12.xcor()
+        o12.setx(x-vel)
+
+
+
+
+
+#LOOP
+while True:
+    wn.update()
+
+
+    #DELINIAR LOS LIMITES DE LOS OBSTACULOS Y EL JUGADOR
+    if p1.xcor()>lim:
+        p1.direction = "left"
+    if p1.xcor()<-lim and p1.xcor() != -520:
+        p1.direction = "right"
+    if p1.ycor()>lim:
+        p1.direction = "down"
+    if p1.ycor()<-lim:
+        p1.direction = "up"
+
+    if o1.xcor()>lim:
+        o1.direction = "left"
+    if o1.xcor()<-lim:
+        o1.direction = "right"
+    if o1.ycor()>lim:
+        o1.direction = "down"
+    if o1.ycor()<-lim:
+        o1.direction = "up"
+
+    if o2.xcor()>lim:
+        o2.direction = "left"
+    if o2.xcor()<-lim:
+        o2.direction = "right"
+    if o2.ycor()>lim:
+        o2.direction = "down"
+    if o2.ycor()<-lim:
+        o2.direction = "up"
+
+    if o3.xcor()>lim:
+        o3.direction = "left"
+    if o3.xcor()<-lim:
+        o3.direction = "right"
+    if o3.ycor()>lim:
+        o3.direction = "down"
+    if o3.ycor()<-lim:
+        o3.direction = "up"
+
+    if o4.xcor()>lim:
+        o4.direction = "left"
+    if o4.xcor()<-lim:
+        o4.direction = "right"
+    if o4.ycor()>lim:
+        o4.direction = "down"
+    if o4.ycor()<-lim:
+        o4.direction = "up"
+
+    if o5.xcor()>lim:
+        o5.direction = "left"
+    if o5.xcor()<-lim:
+        o5.direction = "right"
+    if o5.ycor()>lim:
+        o5.direction = "down"
+    if o5.ycor()<-lim:
+        o5.direction = "up"
+
+    if o6.xcor()>lim:
+        o6.direction = "left"
+    if o6.xcor()<-lim:
+        o6.direction = "right"
+    if o6.ycor()>lim:
+        o6.direction = "down"
+    if o6.ycor()<-lim:
+        o6.direction = "up"
+
+    if o7.xcor()>lim:
+        o7.direction = "left"
+    if o7.xcor()<-lim:
+        o7.direction = "right"
+    if o7.ycor()>lim:
+        o7.direction = "down"
+    if o7.ycor()<-lim:
+        o7.direction = "up"
+
+    if o8.xcor()>lim:
+        o8.direction = "left"
+    if o8.xcor()<-lim:
+        o8.direction = "right"
+    if o8.ycor()>lim:
+        o8.direction = "down"
+    if o8.ycor()<-lim:
+        o8.direction = "up"
+
+    if o9.xcor()>lim:
+        o9.direction = "left"
+    if o9.xcor()<-lim:
+        o9.direction = "right"
+    if o9.ycor()>lim:
+        o9.direction = "down"
+    if o9.ycor()<-lim:
+        o9.direction = "up"
+
+    if o10.xcor()>lim:
+        o10.direction = "left"
+    if o10.xcor()<-lim:
+        o10.direction = "right"
+    if o10.ycor()>lim:
+        o10.direction = "down"
+    if o10.ycor()<-lim:
+        o10.direction = "up"
+
+    if o11.xcor()>lim:
+        o11.direction = "left"
+    if o11.xcor()<-lim:
+        o11.direction = "right"
+    if o11.ycor()>lim:
+        o11.direction = "down"
+    if o11.ycor()<-lim:
+        o11.direction = "up"
+
+    if o12.xcor()>lim:
+        o12.direction = "left"
+    if o12.xcor()<-lim:
+        o12.direction = "right"
+    if o12.ycor()>lim:
+        o12.direction = "down"
+    if o12.ycor()<-lim:
+        o12.direction = "up"
+
+    #GENERAR COMPORTAMIENTO RANDOM DE LOS OBSTACULOS
+    if t == 0 :
+        o1.direction = random.choice(["up", "down", "left", "right"])
+        o2.direction = random.choice(["up", "down", "left", "right"])
+        o3.direction = random.choice(["up", "down", "left", "right"])
+        o4.direction = random.choice(["up", "down", "left", "right"])
+        o5.direction = random.choice(["up", "down", "left", "right"])
+        o6.direction = random.choice(["up", "down", "left", "right"])
+        o7.direction = random.choice(["up", "down", "left", "right"])
+        o8.direction = random.choice(["up", "down", "left", "right"])
+        o9.direction = random.choice(["up", "down", "left", "right"])
+        o10.direction = random.choice(["up", "down", "left", "right"])
+        o11.direction = random.choice(["up", "down", "left", "right"])
+        o12.direction = random.choice(["up", "down", "left", "right"])
+        t = time
+    else:
+        t -= 1
+
+    #CONSEGUIR PUNTOS
+    if p1.distance(obj) < dis2 and vida >= 0:
+        pun += 10
+        obj.clear()
+        x = random.randint(-450, 450)
+        y = random.randint(-450, 450)
+        obj.goto(x,y)
+        pen.clear()
+        pen.goto(0, 470)
+        pen.write("VIDA: {}".format(vida), align="center", font=("Courier", 20, "normal"))
+        pen.goto(300, 470)
+        pen.write("PUNTOS {}".format(pun), align="center", font=("Courier", 20, "normal"))
+
+
+    #COLISION DE EL JUGADOR 1 Y LOS OBSTACULOS
+    if p1.distance(o1) < dis and vida >= 0 or p1.distance(o2) < dis and vida >= 0 or p1.distance(o3) < dis and vida >= 0 or p1.distance(o4) < dis and vida >= 0 or p1.distance(o5) < dis and vida >= 0 or p1.distance(o6) < dis and vida >= 0 or p1.distance(o7) < dis and vida >= 0 or p1.distance(o8) < dis and vida >= 0 or p1.distance(o9) < dis and vida >= 0 or p1.distance(o10) < dis and vida >= 0 or p1.distance(o11) < dis and vida >= 0 or p1.distance(o12) < dis and vida >= 0 :
+        vida -= 1
+        pen.clear()
+        pen.goto(0, 470)
+        pen.write("VIDA: {}".format(vida), align="center", font=("Courier", 20, "normal"))
+        pen.goto(300, 470)
+        pen.write("PUNTOS {}".format(pun), align="center", font=("Courier", 20, "normal"))
+
+    #GAME OVER
+    if vida <= 0:
+        pen.clear()
+        pen.goto(0,0)
+        pen.write("GAME OVER", align="center", font=("Courier", 40, "normal"))
+        pen.goto(0, 470)
+        pen.write("VIDA: {}".format(vida), align="center", font=("Courier", 20, "normal"))
+        pen.goto(300, 470)
+        pen.write("PUNTOS {}".format(pun), align="center", font=("Courier", 20, "normal"))
+        p1.direction = "stop"
+        p1.goto(-500,0)
+        o1.direction = "stop"
+        o2.direction = "stop"
+        o3.direction = "stop"
+        o4.direction = "stop"
+        o5.direction = "stop"
+        o6.direction = "stop"
+        o7.direction = "stop"
+        o8.direction = "stop"
+        o9.direction = "stop"
+        o10.direction = "stop"
+        o11.direction = "stop"
+        o12.direction = "stop"
+
+
+    moverse_p1()
+    moverse_o1()
+    moverse_o2()
+    moverse_o3()
+    moverse_o4()
+    moverse_o5()
+    moverse_o6()
+    moverse_o7()
+    moverse_o8()
+    moverse_o9()
+    moverse_o10()
+    moverse_o11()
+    moverse_o12()
+
+
+wn.mainloop()
